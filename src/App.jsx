@@ -132,7 +132,7 @@ const App = () => {
             <br />
             Agility: {zombieFighter.agility}
             <br />
-            <button onClick={() => handleAddFighter(zombieFighter)}>Add to team</button>
+            {/* <button onClick={() => handleAddFighter(zombieFighter)}>Add to team</button> */}
           </li>
         ))}
       </ul>
