@@ -96,21 +96,26 @@ const App = () => {
 
 
   const handleAddFighter = (addFighter) => {
-    
-    setMoney(money - addFighter.price);
-    
-    setTeam([...team, addFighter]);
-    // setTeam(team => [...team, zombieFighter]);
-    
-    setZombieFighters(
-      zombieFighters.filter((zombieFighter) => zombieFighter.id !== addFighter.id)
-    );
+
+    if (money >= addFighter.price) {
+
+      setMoney(money - addFighter.price);
+
+      setTeam([...team, addFighter]);
+      // setTeam(team => [...team, zombieFighter]);
+
+      setZombieFighters(
+        zombieFighters.filter((zombieFighter) => zombieFighter.id !== addFighter.id)
+      );
+    } else {
+      console.log('poor, sad');
+    };
   };
 
   return (
     <>
       <h1>hallooooo world</h1>
-      
+
       <h2>Your inventory:</h2>
       Money: {money}
 
