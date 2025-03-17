@@ -94,6 +94,9 @@ const App = () => {
 
   const [zombieFighters, setZombieFighters] = useState([...totalList]);
 
+  let totalStrength = 0;
+  let totalAgility = 0;
+
 
 
   // take a fighter out of zombieFighters, and add it to team
@@ -104,15 +107,36 @@ const App = () => {
       setMoney(money - addFighter.price);
 
       setTeam([...team, addFighter]);
-      // setTeam(team => [...team, zombieFighter]);
-
+      
       setZombieFighters(
         zombieFighters.filter((zombieFighter) => zombieFighter.id !== addFighter.id)
       );
+
+      totalStrength = 500;
+      totalAgility = totalAgility + addFighter.agility;
+
+
     } else {
       console.log('poor, sad');
     };
+    console.log(totalStrength);
   };
+
+  const handleRemoveFighter = (removeFighter) => {
+
+    setMoney(money + removeFighter.price);
+
+    setTeam(
+      team.filter((teamMember) => teamMember.id !== removeFighter.id)
+    );
+    
+    setZombieFighters([...zombieFighters, removeFighter]);
+
+    totalStrength = totalStrength + removeFighter.strength;
+    console.log(totalStrength);
+
+  };
+
 
   return (
     <>
@@ -120,6 +144,10 @@ const App = () => {
 
       <h2>Your inventory:</h2>
       Money: {money}
+      <br />
+      Total team strength: {totalStrength}
+      <br />
+      Total team agility: {totalAgility}
 
       <h2>Your team:</h2>
       <h4>
@@ -137,7 +165,7 @@ const App = () => {
             <br />
             Agility: {zombieFighter.agility}
             <br />
-            {/* <button onClick={() => handleAddFighter(zombieFighter)}>Add to team</button> */}
+            <button onClick={() => handleRemoveFighter(zombieFighter)}>Remove from team</button>
           </li>
         ))}
       </ul>
