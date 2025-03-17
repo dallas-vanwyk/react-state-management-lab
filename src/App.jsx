@@ -94,9 +94,6 @@ const App = () => {
 
   const [zombieFighters, setZombieFighters] = useState([...totalList]);
 
-  let totalStrength = 0;
-  let totalAgility = 0;
-
 
 
   // take a fighter out of zombieFighters, and add it to team
@@ -107,15 +104,10 @@ const App = () => {
       setMoney(money - addFighter.price);
 
       setTeam([...team, addFighter]);
-      
+
       setZombieFighters(
         zombieFighters.filter((zombieFighter) => zombieFighter.id !== addFighter.id)
       );
-
-      totalStrength = 500;
-      totalAgility = totalAgility + addFighter.agility;
-
-
     } else {
       console.log('poor, sad');
     };
@@ -129,13 +121,17 @@ const App = () => {
     setTeam(
       team.filter((teamMember) => teamMember.id !== removeFighter.id)
     );
-    
+
     setZombieFighters([...zombieFighters, removeFighter]);
-
-    totalStrength = totalStrength + removeFighter.strength;
-    console.log(totalStrength);
-
   };
+
+  const totalStrength = team.reduce((total, member) => {
+    return total + member.strength;
+  }, 0);
+
+  const totalAgility = team.reduce((total, member) => {
+    return total + member.agility;
+  }, 0);
 
 
   return (
