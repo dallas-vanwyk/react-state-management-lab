@@ -95,10 +95,12 @@ const App = () => {
   const [zombieFighters, setZombieFighters] = useState([...totalList]);
 
 
+
+  // take a fighter out of zombieFighters, and add it to team
+  // addFighter is just in the local scope of this function, and is the specific one being added
+  // used a different variable name from the zombieFighters.filter()
   const handleAddFighter = (addFighter) => {
-
     if (money >= addFighter.price) {
-
       setMoney(money - addFighter.price);
 
       setTeam([...team, addFighter]);
@@ -114,12 +116,15 @@ const App = () => {
 
   return (
     <>
-      <h1>hallooooo world</h1>
+      <h1>Reactville Zombie Apocalypse</h1>
 
       <h2>Your inventory:</h2>
       Money: {money}
 
       <h2>Your team:</h2>
+      <h4>
+        {team.length === 0 ? 'Pick some team members!' : ''}
+      </h4>
       <ul>
         {team.map((zombieFighter, index) => (
           <li>
